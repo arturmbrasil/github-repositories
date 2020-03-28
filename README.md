@@ -1,8 +1,6 @@
 ## GitHub Repositories
 
-Use the GitHub API to show issues from selected repositories.
-
-Made with [React](https://reactjs.org).
+Using [React](https://reactjs.org) + [GitHub API](https://developer.github.com/v3/) to show issues from selected repositories.
 
 ## 💻 Screenshots
 
