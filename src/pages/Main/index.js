@@ -16,7 +16,7 @@ export default class Main extends Component {
     error: false,
   };
 
-  // Carregar os dados do localStorage
+  // load localStorage
   componentDidMount() {
     const repositories = localStorage.getItem('repositories');
 
@@ -25,7 +25,7 @@ export default class Main extends Component {
     }
   }
 
-  // Salvar os dados do localStorage
+  // save localStorage
   componentDidUpdate(_, prevState) {
     const { repositories } = this.state;
 
@@ -46,8 +46,14 @@ export default class Main extends Component {
     try {
       const { newRepo, repositories } = this.state;
 
-      if (newRepo === '')
-        throw Object.assign(new Error('Você precisa indicar um repositório'));
+      if (newRepo === '') throw Object.assign(new Error('Repository required'));
+
+      const repositoryExists = repositories.find(
+        (repo) => repo.name === newRepo
+      );
+
+      if (repositoryExists)
+        throw Object.assign(new Error('Duplicate repository'));
 
       const response = await api.get(`repos/${newRepo}`);
 
@@ -73,13 +79,13 @@ export default class Main extends Component {
       <Container>
         <h1>
           <FaGithubAlt />
-          Repositórios
+          Repositories
         </h1>
 
         <Form onSubmit={this.handleSubmit} error={error}>
           <input
             type="text"
-            placeholder="Adicionar repositório"
+            placeholder="Add repository"
             value={newRepo}
             onChange={this.handleInputChange}
           />
@@ -98,7 +104,7 @@ export default class Main extends Component {
             <li key={repository.name}>
               <span>{repository.name}</span>
               <Link to={`/repository/${encodeURIComponent(repository.name)}`}>
-                Detalhes
+                Details
               </Link>
             </li>
           ))}

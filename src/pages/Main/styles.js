@@ -11,6 +11,8 @@ export const Form = styled.form`
     padding: 10px 15px;
     border-radius: 4px;
     font-size: 16px;
+
+    transition: border 0.25s ease-in-out;
   }
 `;
 
@@ -62,7 +64,6 @@ export const List = styled.ul`
     justify-content: space-between;
     align-items: center;
 
-    /* Aplica a estilização em todos os itens menos no primeiro */
     & + li {
       border-top: 1px solid #eee;
     }
